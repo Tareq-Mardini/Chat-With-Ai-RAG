@@ -18,7 +18,6 @@ function DashboardLayout() {
 
   console.log("Tareq");
 
-
   useEffect(() => {
     if (chats?.chats?.length) {
       setChatList(chats.chats);
@@ -40,8 +39,10 @@ function DashboardLayout() {
         />
         <div className="right-side">
           <MainContent>
-
-
+            <h2>tareq</h2>
+            <h2>tareq</h2>
+            <h2>tareq</h2>
+            <h2>tareq</h2>
           </MainContent>
         </div>
       </div>

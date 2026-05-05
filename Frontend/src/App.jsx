@@ -4,7 +4,7 @@ import Register from "./pages/Auth/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Chat/ChatPage";
 import ChatProvider from "./context/ChatProvider";
-import TestPage from "./pages/Chat/testPage";
+import SentMessage from "./pages/Chat/SentMessage";
 function App() {
   return (
     <BrowserRouter>
@@ -23,11 +23,11 @@ function App() {
           }
         />
         <Route
-          path="/test"
+          path="/Chat/:id"
           element={
             <ProtectedRoute>
               <ChatProvider>
-                <TestPage />
+                <SentMessage />
               </ChatProvider>
             </ProtectedRoute>
           }
