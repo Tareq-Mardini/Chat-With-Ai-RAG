@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CreateChats } from "../../../api/Chat";
 import "./NewChatButton.css"; // مسار الـ axios function تبعتك
+import { useNavigate } from "react-router-dom";
 
 function NewChatButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,11 +72,13 @@ function NewChatButton() {
   );
 }
 
-function ChatItem({ chat, active, onClick, style }) {
+function ChatItem({ chat, active, style }) {
+  const navigate = useNavigate();
+
   return (
     <div
       className={`chat-item ${active ? "active" : ""}`}
-      onClick={() => onClick(chat.id)}
+      onClick={() => navigate(`/Chat/${chat.id}`)}
       style={style}
     >
       <span className="chat-item-icon">💬</span>

@@ -5,6 +5,7 @@ import Sidebar from "../../features/chat/components/Sidebar";
 import "../../styles/Chat.css";
 import { useContext } from "react";
 import { ChatContext } from "../../context/ChatContext";
+import { useParams } from "react-router-dom";
 
 import { Link } from "react-router-dom";
 // ===================== LAYOUT =====================
@@ -15,7 +16,7 @@ function DashboardLayout() {
   const [chatList, setChatList] = useState(chats?.chats || []);
   const [value, setValue] = useState("");
   const [Error, setError] = useState("");
-
+  const { id } = useParams();
   console.log("Tareq");
 
   useEffect(() => {
