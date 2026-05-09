@@ -121,11 +121,11 @@ class OpenRouterService
             ];
         } catch (\Throwable $e) {
 
-
-
             return [
                 'success' => false,
-                'message' => 'Server error',
+                'message' => $e->getMessage(),
+                'line'    => $e->getLine(),
+                'file'    => $e->getFile(),
                 'status'  => 500
             ];
         }

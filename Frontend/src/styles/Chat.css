@@ -272,6 +272,7 @@
     border-radius: var(--radius);
     padding: 32px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+height: fit-content;
   }
   .welcome-card h2 {
     font-family: 'Syne', sans-serif;

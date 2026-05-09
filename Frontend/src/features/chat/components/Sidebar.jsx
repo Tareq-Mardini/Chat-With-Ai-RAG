@@ -84,7 +84,6 @@ function ChatItem({ chat, active, style }) {
       <span className="chat-item-icon">💬</span>
       <div className="chat-item-info">
         <div className="chat-item-title">{chat.title}</div>
-        <div className="chat-item-title">{chat.id}</div>
       </div>
     </div>
   );
