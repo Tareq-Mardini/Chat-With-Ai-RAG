@@ -15,3 +15,15 @@ export const GetChatMessages = (id) => {
 export const SendMessage = (id, data) => {
   return axios.post(`/auth/chats/${id}/messages`, data);
 };
+
+export const UploadPdf = (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  return axios.post("/auth/upload-pdf", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
+
+export const IndexChunks = () => {
+  return axios.post("/auth/index-chunks");
+};

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CreateChats } from "../../../api/Chat";
 import "./NewChatButton.css"; // مسار الـ axios function تبعتك
 import { useNavigate } from "react-router-dom";
+import { UploadPdf, IndexChunks } from "../../../api/Chat";
 
 function NewChatButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -105,6 +106,70 @@ function ChatList({ chats, activeId, onSelect }) {
   );
 }
 
+function UploadPdfButton() {
+  const [status, setStatus] = useState({ msg: "", type: "" });
+  const [loading, setLoading] = useState(false);
+
+  const handleUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setLoading(true);
+    setStatus({ msg: "Uploading...", type: "" });
+
+    try {
+      // الخطوة 1: رفع الـ PDF
+      await UploadPdf(file);
+      setStatus({ msg: "Indexing...", type: "" });
+
+      // الخطوة 2: عمل index تلقائياً
+      await IndexChunks();
+
+      setStatus({ msg: "✓ PDF indexed successfully!", type: "success" });
+    } catch (e) {
+      setStatus({
+        msg: e.response?.data?.message || "Upload failed.",
+        type: "error",
+      });
+    } finally {
+      setLoading(false);
+      // إخفاء الرسالة بعد 3 ثواني
+      setTimeout(() => setStatus({ msg: "", type: "" }), 3000);
+      // reset input
+      e.target.value = "";
+    }
+  };
+
+  return (
+    <div className="upload-pdf-wrapper">
+      <label className={`upload-pdf-btn ${loading ? "loading" : ""}`}>
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleUpload}
+          disabled={loading}
+          style={{ display: "none" }}
+        />
+        {loading ? (
+          <>
+            <span className="upload-spinner" />
+            Processing...
+          </>
+        ) : (
+          <>
+            <span>📄</span>
+            Upload PDF
+          </>
+        )}
+      </label>
+
+      {status.msg && (
+        <p className={`upload-status ${status.type}`}>{status.msg}</p>
+      )}
+    </div>
+  );
+}
+
 export default function Sidebar({ chats, activeChat, onSelect }) {
   return (
     <aside className="sidebar">
@@ -114,7 +179,7 @@ export default function Sidebar({ chats, activeChat, onSelect }) {
       </div>
 
       <NewChatButton />
-
+      <UploadPdfButton />
       <div className="section-label">Recent Chats</div>
 
       <ChatList chats={chats} activeId={activeChat} onSelect={onSelect} />

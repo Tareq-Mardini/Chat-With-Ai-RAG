@@ -67,28 +67,6 @@ class OpenRouterService
                 ];
             })->values()->toArray();
 
-            // // إذا يوجد صورة أضف رابطها للنص الأخير
-            // if ($image) {
-            //     $imageData = base64_encode(file_get_contents($image->getRealPath()));
-            //     $mimeType = $image->getMimeType();
-
-            //     $base64Image = "data:$mimeType;base64,$imageData";
-
-            //     $messages[count($messages) - 1]['content'] .= "\n[Image: $base64Image]";
-            // }
-            // ✅ 6. إرسال للـ AI
-
-
-
-
-
-
-
-
-
-
-
-            // ✅ 5.5 RAG - جلب chunks المشابهة
             $systemPrompt = null;
             try {
                 // حول السؤال لـ embedding

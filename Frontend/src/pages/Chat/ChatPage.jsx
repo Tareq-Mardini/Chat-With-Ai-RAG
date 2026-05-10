@@ -40,8 +40,60 @@ function DashboardLayout() {
         />
         <div className="right-side">
           <MainContent>
+            <div style={{ marginTop: "60px" }} className="welcome-root">
+              <div className="orb-wrap">
+                <div className="orb-ring" />
+                <div className="orb-dot d1" />
+                <div className="orb-dot d2" />
+                <div className="orb-dot d3" />
+                <div className="orb-core">✦</div>
+              </div>
 
+              <h1 className="w-heading">
+                Welcome to Chats With AI{" "}
+                <span
+                  style={{
+                    color: "rgba(99,102,241,0.7)",
 
+                    fontWeight: "400",
+                  }}
+                >
+                  ( RAG )
+                </span>
+              </h1>
+
+              <p className="w-sub">
+                An intelligent assistant that reads your documents and answers
+                questions from their actual content — not guesses.
+              </p>
+
+              <div className="chips">
+                {[
+                  "📄 PDF documents",
+                  "🔍 Semantic search",
+                  "🧠 RAG powered",
+                  "💬 Contextual chat",
+                ].map((c) => (
+                  <div key={c} className="chip">
+                    {c}
+                  </div>
+                ))}
+              </div>
+
+              <div className="steps" style={{ color: "white" }}>
+                {[
+                  { num: "01", icon: "⬆", label: "Upload your PDF" },
+                  { num: "02", icon: "🗄", label: "We index it for you" },
+                  { num: "03", icon: "💬", label: "Ask anything" },
+                ].map((s) => (
+                  <div key={s.num} className="step">
+                    <div className="step-num">STEP {s.num}</div>
+                    <div className="step-icon">{s.icon}</div>
+                    <div className="step-label">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </MainContent>
         </div>
       </div>
