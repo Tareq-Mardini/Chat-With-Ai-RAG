@@ -14,7 +14,7 @@ class OpenRouterService
     private string $apiUrl;
     private string $model;
 
-    public function __construct()
+    public function __construct(private EmbeddingService $embeddingService)
     {
         $this->apiKey = config('services.openrouter.api_key');
         $this->apiUrl = config('services.openrouter.url');
@@ -77,13 +77,57 @@ class OpenRouterService
             //     $messages[count($messages) - 1]['content'] .= "\n[Image: $base64Image]";
             // }
             // ✅ 6. إرسال للـ AI
+
+
+
+
+
+
+
+
+
+
+
+            // ✅ 5.5 RAG - جلب chunks المشابهة
+            $systemPrompt = null;
+            try {
+                // حول السؤال لـ embedding
+                $queryVectors = $this->embeddingService->embedTexts([$message]);
+                $queryVector  = $queryVectors[0];
+
+                // ابحث في Qdrant
+                $similarChunks = $this->embeddingService->searchSimilar($queryVector, limit: 3);
+
+                if (!empty($similarChunks)) {
+                    $context = collect($similarChunks)
+                        ->pluck('payload.content')
+                        ->filter()
+                        ->implode("\n\n---\n\n");
+
+                    $systemPrompt = "You are a helpful assistant. Answer based on the following context:\n\n{$context}\n\nIf the answer is not in the context, say you don't know.";
+                }
+            } catch (\Throwable $e) {
+                Log::warning('RAG failed, continuing without context: ' . $e->getMessage());
+            }
+
+            // ✅ 6. إرسال للـ AI
+            $payload = [
+                'model'    => $this->model,
+                'messages' => $messages,
+            ];
+
+            // أضف system prompt إذا عندنا context
+            if ($systemPrompt) {
+                array_unshift($payload['messages'], [
+                    'role'    => 'system',
+                    'content' => $systemPrompt,
+                ]);
+            }
+
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->apiKey,
                 'Content-Type'  => 'application/json',
-            ])->post($this->apiUrl, [
-                'model'    => $this->model,
-                'messages' => $messages,
-            ]);
+            ])->post($this->apiUrl, $payload);
 
             if ($response->failed()) {
                 return [

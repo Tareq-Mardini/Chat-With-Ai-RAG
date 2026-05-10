@@ -40,5 +40,12 @@ return [
         'url'     => env('OPENROUTER_URL'),
         'model'   => env('OPENROUTER_MODEL'),
     ],
+    'openai' => [
+        'api_key' => env('CHATGPT_API_KEY'),
+
+    ],
+    'hugging' => [
+        'api_key' => env('HUGGINGFACE_API_KEY'),
+    ],
 
 ];

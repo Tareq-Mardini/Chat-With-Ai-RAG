@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('chunks', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+
+            $table->longText('content');
+
+            $table->integer('chunk_index');
+
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
