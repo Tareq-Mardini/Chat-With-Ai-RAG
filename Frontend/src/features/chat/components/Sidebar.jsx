@@ -3,12 +3,15 @@ import { CreateChats } from "../../../api/Chat";
 import "./NewChatButton.css"; // مسار الـ axios function تبعتك
 import { useNavigate } from "react-router-dom";
 import { UploadPdf, IndexChunks } from "../../../api/Chat";
+import { useContext } from "react"; // أضف هاد
+import { ChatContext } from "../../../context/ChatContext";
 
 function NewChatButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState({ msg: "", type: "" });
   const [loading, setLoading] = useState(false);
+  const { RefreshDB } = useContext(ChatContext);
 
   const handleSubmit = async () => {
     if (!title.trim()) {
@@ -21,6 +24,7 @@ function NewChatButton() {
       await CreateChats({ title });
       setStatus({ msg: "Chat created!", type: "success" });
       setTitle("");
+      await RefreshDB();
     } catch (e) {
       setStatus({
         msg: e.response?.data?.message || "Something went wrong.",

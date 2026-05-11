@@ -46,7 +46,9 @@ function DashboardLayout() {
                 <div className="orb-dot d1" />
                 <div className="orb-dot d2" />
                 <div className="orb-dot d3" />
-                <div className="orb-core">✦</div>
+                <div style={{ color: "white" }} className="orb-core">
+                  ✦
+                </div>
               </div>
 
               <h1 className="w-heading">
