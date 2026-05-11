@@ -390,4 +390,4 @@ BAAI/bge-small-en-v1.5
 
 # 👨‍💻 Author
 
-Built with ❤️ using Laravel, React, Qdrant, and modern AI tooling.
+Built with tareq mardini, using Laravel, React, Qdrant, and modern AI tooling.
