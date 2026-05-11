@@ -98,7 +98,7 @@ class DocumentController extends Controller
                     'id'     => $chunk->id,
                     'vector' => $vectors[$index],
                     'payload' => [
-                        'content'     => mb_substr($chunk->content, 0, 500),
+                        'content'     => mb_substr($chunk->content, 0, 800),
                         'chunk_index' => $chunk->chunk_index,
                     ]
                 ];

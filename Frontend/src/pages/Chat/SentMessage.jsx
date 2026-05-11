@@ -127,14 +127,17 @@ export default function SentMessage() {
               <p>Start a new conversation</p>
             </div>
           ) : (
-            <div className="messages-list">
+            <div style={{ minHeight: "500px" }} className="messages-list">
               {messages.map((msg, i) => (
                 <div key={i} className={`message-row ${msg.role}`}>
                   {msg.role === "assistant" && (
                     <div className="msg-avatar assistant-avatar">AI</div>
                   )}
 
-                  <div className={`message-bubble ${msg.role}`}>
+                  <div
+                    style={{ paddingLeft: "24px" }}
+                    className={`message-bubble ${msg.role}`}
+                  >
                     {msg.isTyping ? (
                       <div className="typing-dots">
                         <span />

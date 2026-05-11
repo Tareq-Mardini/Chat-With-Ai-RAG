@@ -54,7 +54,12 @@ function NewChatButton() {
               onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
             />
             {status.msg && (
-              <p className={`status ${status.type}`}>{status.msg}</p>
+              <p
+                style={{ color: "#4ade80" }}
+                className={`status ${status.type}`}
+              >
+                {status.msg}
+              </p>
             )}
             <div className="modal-actions">
               <button
