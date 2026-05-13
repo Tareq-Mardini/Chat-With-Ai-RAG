@@ -1,12 +1,65 @@
 # 🚀 RAG PDF Chat System
 
-An AI-powered Retrieval-Augmented Generation (RAG) system built using React, Laravel, HuggingFace Embeddings, Qdrant Vector Database, and OpenRouter LLMs.
+An AI-powered Retrieval-Augmented Generation (RAG) platform built using React, Laravel, HuggingFace Embeddings, Qdrant Vector Database, and OpenRouter LLMs.
+
+The system enables users to upload PDF documents, perform semantic search, and interact with AI-powered contextual chat using modern RAG architecture.
+
+---
+
+# 🖼️ System Screenshots
+
+---
+
+## 🏠 Main Dashboard
+
+The main application interface where users can manage chats and uploaded documents.
+
+![Main Dashboard](./images/1.PNG)
+
+---
+
+## 💬 Create New Chat
+
+Users can create new AI conversations and manage multiple chat sessions.
+
+![Create Chat](./images/2.PNG)
+
+---
+
+## 📄 Upload PDF Documents
+
+Upload and process PDF documents for semantic retrieval and AI-powered interaction.
+
+![Upload PDF](./images/3.PNG)
+
+---
+
+## 🤖 AI Chat Interface
+
+Interactive contextual chat powered by RAG architecture and vector similarity search.
+
+![Chat Interface](./images/4.PNG)
+
+---
+
+# 🌟 Features
+
+✅ PDF Upload & Processing  
+✅ Semantic Vector Search  
+✅ AI-Powered Question Answering  
+✅ Full RAG Pipeline Implementation  
+✅ Context-Aware Responses  
+✅ Persistent Chat History  
+✅ User Authentication System  
+✅ Multi-User Conversation Management  
+✅ Vector Similarity Search with Qdrant  
+✅ Chunk-Based Retrieval  
+✅ React + Laravel Full Stack Architecture  
+✅ Modern Responsive UI
 
 ---
 
 # 🧠 System Architecture
-
-The system workflow:
 
 ```text
 PDF Upload → Text Extraction → Chunking → Embeddings → Qdrant Vector Store
@@ -19,19 +72,38 @@ User Question → Query Embedding → Vector Search → Context Retrieval → LL
 # ⚡ Tech Stack
 
 ## Frontend
+
 - React
 - Vite
 
 ## Backend
+
 - Laravel
 
 ## AI / RAG Stack
+
 - HuggingFace Embeddings API
 - OpenRouter LLM API
 - Qdrant Vector Database
 
 ## Database
+
 - MySQL
+
+---
+
+# 🔐 Authentication & Chat System
+
+The platform includes a complete authentication and conversation management system.
+
+### Features
+
+- User registration & login
+- Secure authentication system
+- Persistent chat history storage
+- Multi-session conversation support
+- User-specific conversations and documents
+- Stored AI interactions and messages
 
 ---
 
@@ -111,17 +183,9 @@ QDRANT_HOST=http://localhost:6333
 
 # 🔑 Required API Keys
 
----
-
 ## 🤗 HuggingFace API
 
-Create API key from:
-
-[Hugging Face](https://huggingface.co/settings/tokens?utm_source=chatgpt.com)
-
-### Used For
-- Generating embeddings
-- Converting chunks and questions into vectors
+https://huggingface.co/settings/tokens
 
 ### Embedding Model
 
@@ -139,13 +203,7 @@ BAAI/bge-small-en-v1.5
 
 ## 🧠 OpenRouter API
 
-Create API key from:
-
-[OpenRouter](https://openrouter.ai/keys?utm_source=chatgpt.com)
-
-### Used For
-- LLM responses
-- AI chat completion
+https://openrouter.ai/keys
 
 ---
 
@@ -185,23 +243,11 @@ php artisan storage:link
 php artisan serve
 ```
 
-Backend URL:
-
-```text
-http://localhost:8000
-```
-
 ---
 
 # 🧩 Qdrant Vector Database Setup
 
----
-
 ## 🔟 Run Qdrant using Docker
-
-Make sure Docker is installed.
-
-Run:
 
 ```bash
 docker run -p 6333:6333 qdrant/qdrant
@@ -221,8 +267,6 @@ curl -X PUT "http://localhost:6333/collections/chunks" ^
 
 # 💻 Frontend Setup (React + Vite)
 
----
-
 ## 1️⃣2️⃣ Navigate to Frontend
 
 ```bash
@@ -241,8 +285,6 @@ npm install
 
 ## 1️⃣4️⃣ Configure Frontend Environment
 
-Create `.env` file:
-
 ```env
 VITE_API_URL=http://localhost:8000/api
 ```
@@ -255,139 +297,8 @@ VITE_API_URL=http://localhost:8000/api
 npm run dev
 ```
 
-Frontend URL:
-
-```text
-http://localhost:5173
-```
-
----
-
-# 🧠 How The RAG Pipeline Works
-
----
-
-# 📄 PDF Processing Flow
-
-### Step 1
-User uploads PDF document
-
-### Step 2
-Laravel extracts text from PDF
-
-### Step 3
-Text is split into smaller chunks
-
-### Step 4
-Chunks are stored in MySQL database
-
-### Step 5
-HuggingFace generates embeddings for chunks
-
-### Step 6
-Embeddings are stored inside Qdrant vector database
-
----
-
-# 💬 Question Answering Flow
-
-### Step 1
-User sends a question
-
-### Step 2
-Question is converted into embedding vector
-
-### Step 3
-Qdrant performs semantic similarity search
-
-### Step 4
-Most relevant chunks are retrieved
-
-### Step 5
-Laravel builds contextual prompt
-
-### Step 6
-Prompt is sent to OpenRouter LLM
-
-### Step 7
-AI-generated response is returned to the user
-
----
-
-# 🛠️ Useful Commands
-
----
-
-## Clear Laravel Cache
-
-```bash
-php artisan optimize:clear
-```
-
----
-
-## List Laravel Routes
-
-```bash
-php artisan route:list
-```
-
----
-
-## Re-index Chunks into Qdrant
-
-Call API endpoint:
-
-```http
-POST /api/index-chunks
-```
-
----
-
-# ⚠️ Important Notes
-
-- Make sure Qdrant is running before indexing documents.
-- Embedding dimension must match Qdrant collection vector size.
-- Current embedding dimension:
-
-```text
-384
-```
-
-- Recommended embedding model:
-
-```text
-BAAI/bge-small-en-v1.5
-```
-
----
-
-# 🌟 Features
-
-✅ PDF Upload & Parsing  
-✅ Semantic Search  
-✅ AI-Powered Question Answering  
-✅ Vector Similarity Search  
-✅ Chunk-Based Retrieval  
-✅ Context-Aware Responses  
-✅ Full RAG Pipeline  
-✅ React + Laravel Architecture  
-
----
-
-# 📌 Future Improvements
-
-- Streaming AI responses
-- Multi-file support
-- Conversation memory
-- Hybrid search
-- Metadata filtering
-- Authentication system
-- Dockerized deployment
-- Production-ready queue system
-
 ---
 
 # 👨‍💻 Author
 
-Built with Tareq Mardini, using Laravel, React, Qdrant, and modern AI tooling.
+Built by Mohammad Tareq Mardini using Laravel, React, Qdrant, and modern AI tooling.
